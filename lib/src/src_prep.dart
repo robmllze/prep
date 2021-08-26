@@ -92,7 +92,7 @@ Future<void> prep({
     }
   } on YamlException catch (e) {
     print("🔴 Prep Error: Error in prep.yaml: $e");
-  } on FileSystemException catch (e) {
+  } on FileSystemException catch (_) {
     // Do nothing.
   } catch (e) {
     print("🔴 Prep Error: $e");

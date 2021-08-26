@@ -1,14 +1,12 @@
 name: prep
-description: A library inspired by the C++ preprocessor, designed to extend the capabilities of Dart.
-version: 0.1.1
-# homepage: https://www.robmllze.com
-
+description: Inspired by the C++ preprocessor, prep helps you manage your source code.
+ See the readme for more information.
+repository: https://github.com/robmllze/prep
+version: 0.1.1+1
 environment:
   sdk: '>=2.13.4 <3.0.0'
-
 dependencies:
   yaml: ^3.1.0 # https://pub.dev/packages/yaml
   meta: ^1.7.0 # https://pub.dev/packages/meta
-
 dev_dependencies:
   lints: ^1.0.1

@@ -35,4 +35,5 @@ parse_these_file_types: [
 # Specify which files not to parse.
 dont_parse_these_files: [
   "prep.yaml",
+  "README.md",
 ]
