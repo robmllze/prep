@@ -6,3 +6,6 @@
 
 0.1.1+1
 - Updated README.md.
+
+0.1.1+2
+- Added sample.gif for README.md.

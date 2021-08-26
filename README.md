@@ -2,6 +2,10 @@
 
 Prep is inspired by the C++ preprocessor and helps you manage your source code.
 
+## Example:
+
+<img src="https://robmllze.github.io/plot/readme_assets/sample.gif" style="max-height: 400px; max-width: 400px; object-fit: contain" />
+
 ## Basics:
 
 1/3 - Examine the following code (prep_example.dart):

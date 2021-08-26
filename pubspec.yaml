@@ -2,7 +2,7 @@ name: prep
 description: Inspired by the C++ preprocessor, prep helps you manage your source code.
  See the readme for more information.
 repository: https://github.com/robmllze/prep
-version: 0.1.1+1
+version: 0.1.1+2
 environment:
   sdk: '>=2.13.4 <3.0.0'
 dependencies:

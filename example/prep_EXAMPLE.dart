@@ -18,9 +18,9 @@ void main() {
   print("Follow me on Instagram " + "<#Instagram = @robmllze>".value);
   print("This file is " + "<#f=prep_example.dart>".value);
   print("This line is number " + "<#l=20>".value);
-  print("The time now is " + "<#t=11:54>".value);
+  print("The time now is " + "<#t=13:11>".value);
   print("This package is " + "<#Package = prep>".value);
-  print("The package version is " + "<#Version = 0.1.1>".value);
+  print("The package version is " + "<#Version = 0.1.1+1>".value);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = r0bm0>".value);
 }
