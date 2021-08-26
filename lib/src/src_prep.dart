@@ -20,11 +20,17 @@ import 'package:prep/src/src_parser.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Reads all files in [path] of [type] except those excluded in [excude].
+///
+/// Set [includeEnv] to true to include your environment variables. Specify
+/// which custom [fields] to update.
+///
+/// Note: Set prep.yaml instead of setting these arguments.
 Future<void> prep({
   final String? path,
   final List<String> types = const [],
   final List<String> exclude = const [],
-  final Map<String, Object> replace = const {},
+  final Map<String, Object> fields = const {},
   final bool? includeEnv,
 }) async {
   try {
@@ -60,7 +66,7 @@ Future<void> prep({
     final _prepSyntaxSep = (_prepDecoded["syntax_sep"] ?? "=") as String;
     final _prepIncludeEnv = (_prepDecoded["include_env"]) as bool?;
     final _prepPath = (_prepDecoded["path"] ?? ".") as String;
-    final _prepReplace = (_prepDecoded["update_these_fields"] ?? {}) as Map;
+    final _prepFields = (_prepDecoded["update_these_fields"] ?? {}) as Map;
     final _prepExclude = (_prepDecoded["dont_parse_these_files"] ?? []) as List;
     final _prepTypes = (_prepDecoded["parse_these_file_types"] ?? []) as List;
 
@@ -80,8 +86,8 @@ Future<void> prep({
       await PrepParser.instance.parse(
         file,
         fields: {
-          ..._prepReplace.cast(),
-          ...replace,
+          ..._prepFields.cast(),
+          ...fields,
           // pubspec.yaml
           if (_package != null) "Package": _package,
           if (_version != null) "Version": _version,

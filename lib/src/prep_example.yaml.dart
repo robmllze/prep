@@ -39,7 +39,7 @@ const PREP_EXAMPLE_YAML = //
     '  "Version": "0.1.0",\n'
     '  "Author": "Robert Mollentze",\n'
     '  "GitHub": "@robmllze",\n'
-    '  "Instagram": "@robmllze,"\n'
+    '  "Instagram": "@robmllze",\n'
     '  "Email": "robmllze@gmail.com",\n'
     '}\n'
     '\n'
@@ -56,6 +56,8 @@ const PREP_EXAMPLE_YAML = //
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Generates a prep.yaml example in the project directory called
+/// prep_example.yaml.
 Future<void> genPrepExampleYaml() {
   return Future<void>(() async {
     final _file0 = File("./prep.yaml");

@@ -1,6 +1,6 @@
-# Welcome to the Prep Package for Dart
+# Welcome to prep
 
-Prep is inspired by the C++ preprocessor and helps you manage your source code.
+Prep is inspired by the C preprocessor and helps you manage your source code.
 
 ## Example:
 
@@ -79,12 +79,12 @@ Update: `<#Time= >` or `<#t= >`
 
 Replace: `<##Time>` or `<##t>`
 
-### **Relative Path of *this* File:**
+### **Relative Path of Current File:**
 Update: `<#Path= >` or `<#p= >`
 
 Replace: `<##Path>` or `<##p>`
 
-### **Short File Name of *this* File:**
+### **Short File Name of Current File:**
 Update: `<#File= >` or `<#f= >`
 
 Replace: `<##File>` or `<##f>`
