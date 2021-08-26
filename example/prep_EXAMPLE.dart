@@ -16,10 +16,10 @@ void main() {
   prep();
   print("Follow me on Instagram " + "<#Instagram = @robmllze>".value);
   print("This file is " + "<#f=prep_example.dart>".value);
-  print("This line is number " + "<#l=18>".value);
-  print("The time now is " + "<#t=06:56>".value);
-  print("This package is " + "<#package = prep>".value);
-  print("The package version is " + "<#version = 0.1.0>".value);
+  print("This line is number " + "<#l=19>".value);
+  print("The time now is " + "<#t=07:52>".value);
+  print("This package is " + "<#Package = prep>".value);
+  print("The package version is " + "<#Version = 0.1.0>".value);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

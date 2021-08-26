@@ -15,12 +15,15 @@ import 'package:prep/src/src_parser.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-String $(final String expression) =>
-    PrepParser.instance.$extract(expression).value.toString();
+String $(final String expression) {
+  return PrepParser.instance.$extract(expression)?.value.toString() ?? "";
+}
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension PrepKeyValue on String {
-  String get key => PrepParser.instance.$extract(this).key.toString();
-  String get value => PrepParser.instance.$extract(this).value.toString();
+  String get key => //
+      PrepParser.instance.$extract(this)?.key.toString() ?? "";
+  String get value => //
+      PrepParser.instance.$extract(this)?.value.toString() ?? "";
 }

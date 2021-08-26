@@ -44,7 +44,7 @@ const PREP_EXAMPLE_YAML = //
     '}\n'
     '\n'
     '# Specify which file types to parse.\n'
-    'parse_these_types: [\n'
+    'parse_these_file_types: [\n'
     '  "dart",\n'
     '  "md",\n'
     ']\n'

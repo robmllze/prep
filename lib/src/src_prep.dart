@@ -69,11 +69,13 @@ Future<void> prep({
       types: [...types, ..._prepTypes.cast()],
       exclude: [...exclude, ..._prepExclude.cast()],
     );
+
     PrepParser.instance.syntax(
       beg: _prepSyntaxBeg,
       end: _prepSyntaxEnd,
       sep: _prepSyntaxSep,
     );
+
     for (final file in _files) {
       await PrepParser.instance.parse(
         file,
@@ -81,15 +83,17 @@ Future<void> prep({
           ..._prepReplace.cast(),
           ...replace,
           // pubspec.yaml
-          if (_package != null) "package": _package,
-          if (_version != null) "version": _version,
-          if (_homepage != null) "homepage": _homepage,
+          if (_package != null) "Package": _package,
+          if (_version != null) "Version": _version,
+          if (_homepage != null) "Homepage": _homepage,
         },
         includeEnv: includeEnv ?? _prepIncludeEnv ?? false,
       );
     }
   } on YamlException catch (e) {
     print("🔴 Prep Error: Error in prep.yaml: $e");
+  } on FileSystemException catch (e) {
+    // Do nothing.
   } catch (e) {
     print("🔴 Prep Error: $e");
   }

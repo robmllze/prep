@@ -26,7 +26,7 @@ update_these_fields: {
 }
 
 # Specify which file types to parse.
-parse_these_types: [
+parse_these_file_types: [
   "dart",
   "md",
   "yaml",

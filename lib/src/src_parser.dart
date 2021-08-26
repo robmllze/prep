@@ -118,8 +118,9 @@ class PrepParser {
         _expUpdate("#$key").firstMatch(line)?.group(0));
     // If match is found.
     if (_match != null) {
+      final _extracted = PrepParser().$extract(_match)?.value;
       final _value =
-          (int.tryParse(PrepParser().$extract(_match).value) ?? -1) + 1;
+          (_extracted != null ? (int.tryParse(_extracted) ?? -1) : 0) + 1;
       final _valueDefault = "$beg#$key $sep $_value$end";
       return line
           .replaceAll(_expUpdate("##$key"), _value.toString())
@@ -142,10 +143,13 @@ class PrepParser {
     final _time = _timeFormatted(_now);
     final _file = File(path);
     final _shortFile = getShortFileName(path);
-    final _title = _shortFile
-        .substring(0, _shortFile.lastIndexOf("."))
-        .toUpperCase()
-        .replaceAll(RegExp("[^A-Z]+"), " ");
+    final _title = () {
+      final _dot = _shortFile.lastIndexOf(".");
+      return _shortFile
+          .substring(0, _dot == -1 ? 0 : _dot)
+          .toUpperCase()
+          .replaceAll(RegExp("[^A-Z]+"), " ");
+    }();
     final _envVars = Platform.environment;
     final _lines = (await _file.readAsLines());
 
@@ -169,12 +173,12 @@ class PrepParser {
       l = _replaceFields(l, "t", _time);
       l = _replaceFields(l, "d", _date);
       l = _replaceFields(l, "l", "${n + 1}");
-      l = _replaceFields(l, "path", path);
-      l = _replaceFields(l, "file", _shortFile);
-      l = _replaceFields(l, "time", _time);
-      l = _replaceFields(l, "date", _date);
-      l = _replaceFields(l, "line", "${n + 1}");
-      l = _replaceFields(l, "title", _title);
+      l = _replaceFields(l, "Path", path);
+      l = _replaceFields(l, "File", _shortFile);
+      l = _replaceFields(l, "Time", _time);
+      l = _replaceFields(l, "Date", _date);
+      l = _replaceFields(l, "Line", "${n + 1}");
+      l = _replaceFields(l, "Title", _title);
 
       // Breaks.
       l = _replaceFields(l, "br-heavy", BR_HEAVY);
@@ -184,7 +188,7 @@ class PrepParser {
       l = _replaceFields(l, "br-line", BR_LINE);
 
       // Experimental.
-      l = _incrementFields(l, "runs");
+      l = _incrementFields(l, "Runs");
 
       // Replace with environment variables.
       if (includeEnv) {
@@ -194,31 +198,29 @@ class PrepParser {
           l = _updateFields1(l, "ENV $_key", _value);
         }
       }
-
       // Custom replacements.
       for (final entry in fields.entries) {
         final _key = entry.key.toString();
+        final _keyLowerCase = _key.toLowerCase();
         final _value = entry.value.toString();
         // Skip if value contains default keys.
         if ([
-              "#d",
-              "#Date",
-              "#f",
-              "#File",
-              "#p",
-              "#Path",
-              "#l",
-              "#Line",
-              "#t",
-              "#Time",
-              "#Title",
-              // pubspec.yaml
-              "#Package",
-              "#Version",
-              "#Homepage",
-            ].contains(_key) ||
+          "d",
+          "date",
+          "f",
+          "file",
+          "p",
+          "path",
+          "l",
+          "line",
+          "t",
+          "time",
+          "title",
+        ].contains(_keyLowerCase)
             // Skip if value contains keywords.
-            _value.toString().contains(RegExp("($beg|$end|$sep)"))) {
+            // NB: beg, end and sep cannot be special RegEx characters.
+            //|| _value.toString().contains(RegExp("($beg|$end|$sep)"))
+            ) {
           continue;
         }
         l = _updateFields1(l, _key, _value);
@@ -233,11 +235,14 @@ class PrepParser {
   //
 
   @protected
-  MapEntry<String, String> $extract(final String expression) {
+  MapEntry<String, String>? $extract(final String expression) {
     final _keyValue = expression.split(sep);
-    final _key = _keyValue[0].replaceAll(beg, " ").trim();
-    final _value = _keyValue[1].replaceAll(end, " ").trim();
-    return MapEntry(_key, _value);
+    if (_keyValue.length >= 2) {
+      final _key = _keyValue[0].replaceAll(beg, " ").trim();
+      final _value = _keyValue[1].replaceAll(end, " ").trim();
+      return MapEntry(_key, _value);
+    }
+    return null;
   }
 }
 
