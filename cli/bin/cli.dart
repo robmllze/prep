@@ -4,7 +4,7 @@
 //
 // <#Author = Robert Mollentze>
 // <#Email = robmllze@gmail.com>
-// <#Date = 8/27/2021>
+// <#Date = 8/28/2021>
 //
 // See LICENSE file
 //
@@ -33,6 +33,8 @@ void main(final List<String> args) async {
           print("→ Generating $_prepYaml...");
           await genPrepExampleYamlEmpty(_prepYaml);
           print("→ Done!");
+          _skip = true;
+          print("→ Skipping prep...");
           break;
         default:
           _prepYaml = _arg.endsWith(".yaml") ? _arg : "$_arg.yaml";
@@ -48,9 +50,9 @@ void main(final List<String> args) async {
           _prepYaml = _value.endsWith(".yaml") ? _value : "$_value.yaml";
           print("→ As per $_prepYaml...");
         }
-        if (_value == "--skip") {
+        if (!_skip && _value == "--skip") {
           _skip = true;
-          print("→ Skipping...");
+          print("→ Skipping prep...");
         }
         if (_key == "--path") {
           _path = _value;

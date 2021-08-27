@@ -4,7 +4,7 @@
 //
 // <#Author = Robert Mollentze>
 // <#Email = robmllze@gmail.com>
-// <#Date = 8/27/2021>
+// <#Date = 8/28/2021>
 //
 // See LICENSE file
 //
@@ -31,9 +31,17 @@ String $(final String expression) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension PrepKeyValue on String {
-  /// Extracts the key from a prep expression.
+  /// Deprecated. Use [prepKey] instead.
+  @deprecated
   String get key => $(this);
 
-  /// Extracts the value from a prep expression.
+  /// Deprecated. Use [prepValue] instead.
+  @deprecated
   String get value => $$(this);
+
+  /// Extracts the key from a prep expression.
+  String get prepKey => $(this);
+
+  /// Extracts the value from a prep expression.
+  String get prepValue => $$(this);
 }

@@ -2,6 +2,10 @@
 
 Inspired by the C preprocessor, this package helps you manage your project with unique source code expressions.
 
+This package includes a compilable CLI application that can be used to prep source files of any programming language. See source code on GitHub: https://github.com/robmllze/prep.
+
+The CLI works well with any Dart project including Flutter web projects.
+
 ## Example
 
 <img src="https://robmllze.github.io/prep/readme_assets/sample.gif" style="max-height: 400px; max-width: 400px; object-fit: contain" />
@@ -56,7 +60,7 @@ void main() {
   // Package as per pubspec.yaml.
   print("This package is " + "<#Package = prep>".value);
   // Version as per pubspec.yaml.
-  print("The package version is " + "<#Version = 0.2.1>".value);
+  print("The package version is " + "<#Version = 0.2.2>".value);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = guest>".value);;
 }
@@ -70,7 +74,7 @@ This line is number 13
 And this line is number 15
 The time now is 23:15
 This package is prep
-The package version is 0.2.1
+The package version is 0.2.2
 Let's print the USERNAME environment variable: guest
 ```
 
@@ -131,7 +135,7 @@ Replace: `<##ENV PATH>` or `<##ENV COMPUTERNAME>` or `<#ENV USERNAME>` etc.
 ## Installing
 ```yaml
 dev_dependencies:
-  prep: ^0.2.1 # https://pub.dev/packages/prep
+  prep: ^0.2.2 # https://pub.dev/packages/prep
 ```
 
 ## Configuring

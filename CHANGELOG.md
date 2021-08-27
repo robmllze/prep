@@ -7,10 +7,10 @@
 - Fixed RangeError caused by extract function
 
 0.1.1+1
-- Updated README.md
+- Updated readme
 
 0.1.1+2
-- Added sample.gif for README.md
+- Added sample.gif for readme
 
 0.1.1+3
 - Fixed comma typo in prep_example.yaml.dart
@@ -20,10 +20,10 @@
 - Added more descriptive comments
 - Improved documentation comments
 - Added the "into" and "os" expressions
-- Improved README.md
+- Improved readme
 
 0.1.2+1
-- Fixed misleading sentence in README.md
+- Fixed misleading sentence in readme
 
 0.2.0
 - Added a basic CLI application that allows prep to be used with other programming languages
@@ -31,6 +31,11 @@
 
 0.2.1
 - Changed minimum package dependencies
+
+0.2.2
+- Added basic web support
+- Updated CLI to 0.1.1
+- Updated readme
 
 ## TODO
 

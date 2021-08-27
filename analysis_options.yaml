@@ -8,3 +8,4 @@ analyzer:
     implicit-casts: false
   errors:
     constant_identifier_names: ignore
+    provide_deprecation_message: ignore
