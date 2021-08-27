@@ -3,31 +3,37 @@
 // UTILS
 //
 // <#Author = Robert Mollentze>
-// <#Date = 8/26/2021>
+// <#Email = robmllze@gmail.com>
+// <#Date = 8/27/2021>
+//
+// See LICENSE file
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 library prep;
 
-import 'package:prep/src/src_parser.dart';
+import 'package:prep/src/parser.dart';
 
 // ignore_for_file: invalid_use_of_protected_member
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Value from prep expression.
-String $(final String expression) {
+/// Extracts the value from a prep expression.
+String $$(final String expression) {
   return PrepParser.instance.$extract(expression)?.value.toString() ?? "";
+}
+
+/// Extracts the key from a prep expression.
+String $(final String expression) {
+  return PrepParser.instance.$extract(expression)?.key.toString() ?? "";
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension PrepKeyValue on String {
-  /// Key from prep expression.
-  String get key => //
-      PrepParser.instance.$extract(this)?.key.toString() ?? "";
+  /// Extracts the key from a prep expression.
+  String get key => $(this);
 
-  /// Value from prep expression.
-  String get value => //
-      PrepParser.instance.$extract(this)?.value.toString() ?? "";
+  /// Extracts the value from a prep expression.
+  String get value => $$(this);
 }

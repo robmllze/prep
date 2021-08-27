@@ -15,12 +15,15 @@
 0.1.1+3
 - Fixed comma typo in prep_example.yaml.dart
 
+0.1.2
+- Organised source code
+- Added more descriptive comments
+- Improved documentation comments
+- Added the "into" and "os" expressions
+- Improved README.md
+
 ## TODO
 
-- Improve README.md
-- Add more descriptive comments
-- Add/improve documentation comments
+- Improve parsing speed
 - Add more expressions
-- Build a CLI application
-
-
+- Build a CLI application so that prep can be used with other languages

@@ -22,18 +22,16 @@ update_these_fields: {
   "Author": "Robert Mollentze",
   "GitHub": "@robmllze",
   "Instagram": "@robmllze",
-  "Email": "robmllze@gmail.com,"
+  "Email": "robmllze@gmail.com",
 }
 
 # Specify which file types to parse.
 parse_these_file_types: [
   "dart",
-  "md",
   "yaml",
 ]
 
 # Specify which files not to parse.
 dont_parse_these_files: [
   "prep.yaml",
-  "README.md",
 ]

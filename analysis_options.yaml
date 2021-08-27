@@ -3,16 +3,12 @@
 
 include: package:lints/recommended.yaml
 analyzer:
-  exclude: [build/**]
+  exclude: []
   language:
     strict-raw-types: true
   strong-mode:
     implicit-casts: false
   errors:
     constant_identifier_names: ignore
-    unnecessary_this: ignore
-    file_names: ignore
-    non_constant_identifier_names: ignore
 linter:
   rules:
-    - cancel_subscriptions

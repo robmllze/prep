@@ -3,13 +3,14 @@
 // PREP
 //
 // <#Author = Robert Mollentze>
-// <#Email = robmllze@gmail.com,>
-// <#Date = 8/26/2021>
+// <#Email = robmllze@gmail.com>
+// <#Date = 8/27/2021>
+//
+// See LICENSE file
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 library prep;
 
-export 'src/src_parser.dart';
-export 'src/src_utils.dart';
-export 'src/src_prep.dart';
+export 'src/utils.dart' show PrepKeyValue;
+export 'src/prep.dart';

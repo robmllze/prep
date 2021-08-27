@@ -1,40 +1,48 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// SRC PREP
+// PREP
 //
 // <#Author = Robert Mollentze>
-// <#Email = robmllze@gmail.com,>
-// <#Date = 8/26/2021>
+// <#Email = robmllze@gmail.com>
+// <#Date = 8/27/2021>
+//
+// See LICENSE file
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 library prep;
 
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
 import 'dart:io' show File, FileSystemException;
 import 'package:yaml/yaml.dart';
-import 'package:prep/src/prep_example.yaml.dart';
-import 'package:prep/src/src_files_and_folders.dart';
-import 'package:prep/src/src_parser.dart';
+import 'prep_example.yaml.dart';
+import 'files_and_folders.dart';
+import 'parser.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Reads all files in [path] of [type] except those excluded in [excude].
+/// Parses all files of types `parseTheseFileTypes` from the `path` directory,
+/// as well as all subdirectories, except for files specified in
+/// `dontParseTheseFiles`.
 ///
-/// Set [includeEnv] to true to include your environment variables. Specify
-/// which custom [fields] to update.
+/// To include environment variables, set `includeEnv` to true.
 ///
-/// Note: Set prep.yaml instead of setting these arguments.
+/// To update custom fields, set `updateTheseFields`.
+///
+/// Note: These arguments will overwrite those specified in prep.yaml.
+/// The example file prep_example.yaml will be generated in the project
+/// directory if prep.yaml doesn't exist.
 Future<void> prep({
   final String? path,
-  final List<String> types = const [],
-  final List<String> exclude = const [],
-  final Map<String, Object> fields = const {},
+  final List<String> parseTheseFileTypes = const [],
+  final List<String> dontParseTheseFiles = const [],
+  final Map<String, Object> updateTheseFields = const {},
   final bool? includeEnv,
 }) async {
   try {
-    // pubspec.yaml
+    // Generate prep_example.yaml if necessary.
+    await genPrepExampleYaml();
+
+    // Parse pubspec.yaml.
     final _pubspec = await () {
       try {
         return File("pubspec.yaml").readAsString();
@@ -48,10 +56,7 @@ Future<void> prep({
     final _version = (_pubspecDecoded["version"]) as String?;
     final _homepage = (_pubspecDecoded["homepage"]) as String?;
 
-    // Generate an example.
-    await genPrepExampleYaml();
-
-    // prep.yaml
+    // Parse prep.yaml.
     final _prep = await () {
       try {
         return File("prep.yaml").readAsString();
@@ -66,29 +71,43 @@ Future<void> prep({
     final _prepSyntaxSep = (_prepDecoded["syntax_sep"] ?? "=") as String;
     final _prepIncludeEnv = (_prepDecoded["include_env"]) as bool?;
     final _prepPath = (_prepDecoded["path"] ?? ".") as String;
-    final _prepFields = (_prepDecoded["update_these_fields"] ?? {}) as Map;
-    final _prepExclude = (_prepDecoded["dont_parse_these_files"] ?? []) as List;
-    final _prepTypes = (_prepDecoded["parse_these_file_types"] ?? []) as List;
+    final _prepUpdateTheseFields =
+        (_prepDecoded["update_these_fields"] ?? {}) as Map;
+    final _prepDontParseTheseFiles =
+        (_prepDecoded["dont_parse_these_files"] ?? []) as List;
+    final _prepParseTheseFileTypes =
+        (_prepDecoded["parse_these_file_types"] ?? []) as List;
 
-    final _files = await getFileNamesFromPath(
+    // Find paths of all parsable files.
+    final _parsables = await getLongFileNamesFromPath(
       path ?? _prepPath,
-      types: [...types, ..._prepTypes.cast()],
-      exclude: [...exclude, ..._prepExclude.cast()],
+      types: [
+        ...parseTheseFileTypes,
+        ..._prepParseTheseFileTypes.cast(),
+      ],
+      filesToExclude: [
+        ...dontParseTheseFiles,
+        ..._prepDontParseTheseFiles.cast(),
+      ],
     );
 
+    // Tweak syntax if necessary.
     PrepParser.instance.syntax(
       beg: _prepSyntaxBeg,
       end: _prepSyntaxEnd,
       sep: _prepSyntaxSep,
     );
 
-    for (final file in _files) {
+    // Parse each parsable file.
+    for (final parsable in _parsables) {
       await PrepParser.instance.parse(
-        file,
+        parsable,
         fields: {
-          ..._prepFields.cast(),
-          ...fields,
-          // pubspec.yaml
+          // Fields from prep.yaml.
+          ..._prepUpdateTheseFields.cast(),
+          // Frields from arguments.
+          ...updateTheseFields,
+          // Fields from pubspec.yaml.
           if (_package != null) "Package": _package,
           if (_version != null) "Version": _version,
           if (_homepage != null) "Homepage": _homepage,
@@ -99,7 +118,7 @@ Future<void> prep({
   } on YamlException catch (e) {
     print("🔴 Prep Error: Error in prep.yaml: $e");
   } on FileSystemException catch (_) {
-    // Do nothing.
+    // Ignore these exceptions. May be thrown if file encoding isn't compatible.
   } catch (e) {
     print("🔴 Prep Error: $e");
   }

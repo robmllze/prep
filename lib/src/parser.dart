@@ -1,10 +1,12 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// SRC PARSER
+// PARSER
 //
 // <#Author = Robert Mollentze>
-// <#Email = robmllze@gmail.com,>
-// <#Date = 8/26/2021>
+// <#Email = robmllze@gmail.com>
+// <#Date = 8/27/2021>
+//
+// See LICENSE file
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
@@ -12,8 +14,8 @@ library prep;
 
 import 'dart:io' show File, Platform;
 import 'package:meta/meta.dart';
-import 'package:prep/src/replacements.dart';
-import 'package:prep/src/src_files_and_folders.dart';
+import 'replacements.dart';
+import 'files_and_folders.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -137,7 +139,7 @@ class PrepParser {
     final String path, {
     final Map<String, Object> fields = const {},
     final bool includeEnv = false,
-  }) async {
+  }) {
     final _now = DateTime.now();
     final _date = _dateFormatted(_now);
     final _time = _timeFormatted(_now);
@@ -150,86 +152,92 @@ class PrepParser {
           .toUpperCase()
           .replaceAll(RegExp("[^A-Z]+"), " ");
     }();
-    final _envVars = Platform.environment;
-    final _lines = (await _file.readAsLines());
+    final _env = Platform.environment;
+    final _os = Platform.operatingSystem.toUpperCase();
+    return Future<void>(() async {
+      final _lines = (await _file.readAsLines());
+      // Loop through lines.
+      for (int n = 0; n < _lines.length; n++) {
+        String l = _lines[n];
+        // Skip immediately if a line contains the stop command.
+        if (l.trim().startsWith("// prep: stop_here")) break;
 
-    // Loop through lines.
-    for (int n = 0; n < _lines.length; n++) {
-      String l = _lines[n];
-      // Skip immediately if a line contains the stop command.
-      if (l.trim().startsWith("// prep: stop_here")) break;
+        // Default updates.
+        l = _updateFields1(l, "Title", _title);
+        l = _updateFields1(l, "OS", _os);
+        l = _updateFields2(l, "d", "Date", _date);
+        l = _updateFields2(l, "f", "File", _shortFile);
+        l = _updateFields2(l, "l", "Line", "${n + 1}");
+        l = _updateFields2(l, "p", "Path", path);
+        l = _updateFields2(l, "t", "Time", _time);
 
-      // Default updates.
-      l = _updateFields2(l, "p", "Path", path);
-      l = _updateFields2(l, "f", "File", _shortFile);
-      l = _updateFields2(l, "t", "Time", _time);
-      l = _updateFields2(l, "d", "Date", _date);
-      l = _updateFields2(l, "l", "Line", "${n + 1}");
-      l = _updateFields1(l, "Title", _title);
+        // Default replacements.
+        l = _replaceFields(l, "d", _date);
+        l = _replaceFields(l, "Date", _date);
+        l = _replaceFields(l, "f", _shortFile);
+        l = _replaceFields(l, "File", _shortFile);
+        l = _replaceFields(l, "l", "${n + 1}");
+        l = _replaceFields(l, "Line", "${n + 1}");
+        l = _replaceFields(l, "OS", _os);
+        l = _replaceFields(l, "p", path);
+        l = _replaceFields(l, "Path", path);
+        l = _replaceFields(l, "t", _time);
+        l = _replaceFields(l, "Time", _time);
+        l = _replaceFields(l, "Title", _title);
 
-      // Default replacements.
-      l = _replaceFields(l, "p", path);
-      l = _replaceFields(l, "f", _shortFile);
-      l = _replaceFields(l, "t", _time);
-      l = _replaceFields(l, "d", _date);
-      l = _replaceFields(l, "l", "${n + 1}");
-      l = _replaceFields(l, "Path", path);
-      l = _replaceFields(l, "File", _shortFile);
-      l = _replaceFields(l, "Time", _time);
-      l = _replaceFields(l, "Date", _date);
-      l = _replaceFields(l, "Line", "${n + 1}");
-      l = _replaceFields(l, "Title", _title);
+        // Breaks.
+        l = _replaceFields(l, "br-heavy", REP_BR_HEAVY);
+        l = _replaceFields(l, "br-medium", REP_BR_MEDIUM);
+        l = _replaceFields(l, "br-light", REP_BR_LIGHT);
+        l = _replaceFields(l, "br-dash", REP_BR_DASH);
+        l = _replaceFields(l, "br-line", REP_BR_LINE);
 
-      // Breaks.
-      l = _replaceFields(l, "br-heavy", BR_HEAVY);
-      l = _replaceFields(l, "br-medium", BR_MEDIUM);
-      l = _replaceFields(l, "br-light", BR_LIGHT);
-      l = _replaceFields(l, "br-dash", BR_DASH);
-      l = _replaceFields(l, "br-line", BR_LINE);
+        // Experimental.
+        l = _replaceFields(l, "intro", repIntro(_title));
+        l = _incrementFields(l, "Runs");
 
-      // Experimental.
-      l = _incrementFields(l, "Runs");
-
-      // Replace with environment variables.
-      if (includeEnv) {
-        for (final entry in _envVars.entries) {
-          final _key = entry.key;
-          final _value = entry.value;
-          l = _updateFields1(l, "ENV $_key", _value);
+        // Replace with environment variables.
+        if (includeEnv) {
+          for (final entry in _env.entries) {
+            final _key = entry.key;
+            final _value = entry.value;
+            l = _updateFields1(l, "ENV $_key", _value);
+          }
         }
-      }
-      // Custom replacements.
-      for (final entry in fields.entries) {
-        final _key = entry.key.toString();
-        final _keyLowerCase = _key.toLowerCase();
-        final _value = entry.value.toString();
-        // Skip if value contains default keys.
-        if ([
-          "d",
-          "date",
-          "f",
-          "file",
-          "p",
-          "path",
-          "l",
-          "line",
-          "t",
-          "time",
-          "title",
-        ].contains(_keyLowerCase)
-            // Skip if value contains keywords.
-            // NB: beg, end and sep cannot be special RegEx characters.
-            //|| _value.toString().contains(RegExp("($beg|$end|$sep)"))
-            ) {
-          continue;
+
+        // Custom replacements.
+        for (final entry in fields.entries) {
+          final _key = entry.key.toString();
+          final _keyLowerCase = _key.toLowerCase();
+          final _value = entry.value.toString();
+          // Skip if value contains default keys.
+          if ([
+            "d",
+            "date",
+            "f",
+            "file",
+            "l",
+            "line",
+            "os",
+            "p",
+            "path",
+            "t",
+            "time",
+            "title",
+          ].contains(_keyLowerCase)
+              // Skip if value contains keywords.
+              // NB: beg, end and sep cannot be special RegEx characters.
+              //|| _value.toString().contains(RegExp("($beg|$end|$sep)"))
+              ) {
+            continue;
+          }
+          l = _updateFields1(l, _key, _value);
         }
-        l = _updateFields1(l, _key, _value);
+        _lines[n] = l;
       }
-      _lines[n] = l;
-    }
-    await _file.writeAsString(_lines.join("\n"));
+      await _file.writeAsString(_lines.join("\n"));
+    });
   }
-
   //
   //
   //

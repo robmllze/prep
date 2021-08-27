@@ -1,12 +1,12 @@
 # Welcome to prep
 
-Prep is inspired by the C preprocessor and helps you manage your source code.
+Inspired by the C preprocessor, this package helps you manage your project with unique source code expressions.
 
-## Example:
+## Example
 
 <img src="https://robmllze.github.io/prep/readme_assets/sample.gif" style="max-height: 400px; max-width: 400px; object-fit: contain" />
 
-## Basics:
+## Basics
 
 1/3 - Examine the following code (prep_example.dart):
 ```dart
@@ -14,6 +14,7 @@ Prep is inspired by the C preprocessor and helps you manage your source code.
 // <#Author=>
 // <#Date=>
 // <#Time=>
+
 import 'package:prep/prep.dart';
 
 void main() {
@@ -40,6 +41,7 @@ void main() {
 // <#Author = Robert Mollentze>
 // <#Date = 8/26/2021>
 // <#Time = 23:15>
+
 import 'package:prep/prep.dart';
 
 void main() {
@@ -47,14 +49,14 @@ void main() {
   prep();
   print("Follow me on Instagram " + "<#Instagram = @robmllze>".value);
   print("This file is " + "<#f=prep_example.dart>".value);
-  print("This line is number " + "<#l=20>".value);
+  print("This line is number " + "<#l=13>".value);
   // Use double ## to completely replace.
-  print("And this line is number " + "22");
+  print("And this line is number " + "15");
   print("The time now is " + "<#t=23:15>".value);
   // Package as per pubspec.yaml.
   print("This package is " + "<#Package = prep>".value);
   // Version as per pubspec.yaml.
-  print("The package version is " + "<#Version = 0.1.1>".value);
+  print("The package version is " + "<#Version = 0.1.2>".value);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = guest>".value);;
 }
@@ -64,15 +66,15 @@ void main() {
 ```text
 Follow me on Instagram @robmllze
 This file is prep_example.dart
-This line is number 20
-And this line is number 22
+This line is number 13
+And this line is number 15
 The time now is 23:15
 This package is prep
-The package version is 0.1.1
+The package version is 0.1.2
 Let's print the USERNAME environment variable: guest
 ```
 
-## Expressions:
+## Expressions
 
 ### **Current Time:**
 Update: `<#Time= >` or `<#t= >`
@@ -93,6 +95,11 @@ Replace: `<##File>` or `<##f>`
 Update: `<#Line= >` or `<#l= >`
 
 Replace: `<##Line>` or `<##l>`
+
+### **Operating System:**
+Update: `<#OS= >`
+
+Replace: `<##OS>`
 
 ### **File Title:**
 Update: `<#Title= >`
@@ -117,17 +124,17 @@ Replace: `<##ENV PATH>` or `<##ENV COMPUTERNAME>` or `<#ENV USERNAME>` etc.
 
 `// <##br-line>`
 
+### **Intro:**
 
+`// <##intro>`
 
-
-
-## Installing:
+## Installing
 ```yaml
 dev_dependencies:
-  prep: ^0.1.1 #https://pub.dev/packages/prep
+  prep: ^0.1.2 #https://pub.dev/packages/prep
 ```
 
-## Configuring:
+## Configuring
 
 Add the following to **prep.yaml** in your project's root directory:
 ```yaml
@@ -155,7 +162,7 @@ update_these_fields: {
   "Author": "Robert Mollentze",
   "GitHub": "@robmllze",
   "Instagram": "@robmllze",
-  "Email": "robmllze@gmail.com,"
+  "Email": "robmllze@gmail.com",
 }
 
 # Specify which file types to parse.
@@ -172,5 +179,44 @@ dont_parse_these_files: [
 ]
 ```
 
-## See Other Packages by @robmllze:
-- elliptic_text: https://pub.dev/packages/elliptic_text/
+Alternatively, you can use the prep function. This will override whatever's in prep.yaml.
+
+```dart
+void main() {
+  // ...
+  prep(
+    path: ".",
+    parseTheseFileTypes: [
+      "dart",
+      "yaml",
+    ],
+    dontParseTheseFiles: [
+      "prep.yaml",
+    ],
+    updateTheseFields: {
+      "Author": "Robert Mollentze",
+      "GitHub": "@robmllze",
+      "Instagram": "@robmllze",
+      "Email": "robmllze@gmail.com",
+    },
+    includeEnv: true,
+  );
+  // ...
+}
+```
+
+## Finally
+
+Have a peak at my other package, *elliptic_text*, available at https://pub.dev/packages/elliptic_text/.
+
+Please let me know if you find any bugs or if you have suggestions.
+
+Thanks,
+
+Robert Mollentze
+
+**GitHub**: https://github.com/robmllze/
+
+**Medium**: https://robmllze.medium.com/
+
+**Email**: robmllze@gmail.com
