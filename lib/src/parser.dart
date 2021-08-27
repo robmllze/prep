@@ -231,6 +231,7 @@ class PrepParser {
               ) {
             continue;
           }
+          l = _replaceFields(l, _key, _value);
           l = _updateFields1(l, _key, _value);
         }
         _lines[n] = l;

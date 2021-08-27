@@ -1,0 +1,11 @@
+name: prep_cli
+description: A simple Prep CLI.
+version: 0.1.0
+publish_to: 'none'
+environment:
+  sdk: '>=2.13.4 <3.0.0'
+dependencies:
+  prep:
+    path: ../
+dev_dependencies:
+  lints: ^1.0.1

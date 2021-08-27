@@ -29,9 +29,11 @@ update_these_fields: {
 parse_these_file_types: [
   "dart",
   "yaml",
+  "md",
 ]
 
 # Specify which files not to parse.
 dont_parse_these_files: [
   "prep.yaml",
+  "README.md",
 ]
