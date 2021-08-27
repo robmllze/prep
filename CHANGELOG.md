@@ -22,12 +22,15 @@
 - Added the "into" and "os" expressions
 - Improved README.md
 
-0.2.0
+0.1.2+1
 - Fixed misleading sentence in README.md
 
 0.2.0
 - Added a basic CLI application that allows prep to be used with other programming languages
 - Fixed a Future-related bug in prep.dart
+
+0.2.1
+- Changed minimum package dependencies
 
 ## TODO
 

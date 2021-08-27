@@ -35,7 +35,7 @@ void main(final List<String> args) async {
           print("→ Done!");
           break;
         default:
-          _prepYaml = _arg.endsWith(".yaml") ? _arg : "${_arg}.yaml";
+          _prepYaml = _arg.endsWith(".yaml") ? _arg : "$_arg.yaml";
           print("→ As per $_prepYaml");
       }
     } else
@@ -45,7 +45,7 @@ void main(final List<String> args) async {
         final _key = args[i].toLowerCase();
         final _value = args[i + 1].toLowerCase();
         if (_key == "--use") {
-          _prepYaml = _value.endsWith(".yaml") ? _value : "${_value}.yaml";
+          _prepYaml = _value.endsWith(".yaml") ? _value : "$_value.yaml";
           print("→ As per $_prepYaml...");
         }
         if (_value == "--skip") {
@@ -59,7 +59,7 @@ void main(final List<String> args) async {
         if (_key == "--new") {
           _prepYaml = _value == "." ? _prepYaml : "$_value.yaml";
           print("→ Generating $_prepYaml...");
-          await genPrepExampleYamlEmpty("$_prepYaml");
+          await genPrepExampleYamlEmpty(_prepYaml);
           print("→ Done!");
         }
       }
