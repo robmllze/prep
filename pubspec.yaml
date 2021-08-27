@@ -1,7 +1,7 @@
 name: prep
 description: Inspired by the C preprocessor, this package helps you manage your project with unique source code expressions.
 repository: https://github.com/robmllze/prep
-version: 0.1.2
+version: 0.1.2+1
 environment:
   sdk: '>=2.13.4 <3.0.0'
 dependencies:

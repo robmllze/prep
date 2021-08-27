@@ -10,8 +10,6 @@
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-library prep;
-
 import 'package:prep/prep.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -24,7 +22,7 @@ void main() {
   print("This line is number " + "<#l=24>".value);
   print("The time now is " + "<#t=13:08>".value);
   print("This package is " + "<#Package = prep>".value);
-  print("The package version is " + "<#Version = 0.1.2>".value);
+  print("The package version is " + "<#Version = 0.1.2+1>".value);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = r0bm0>".value);
 }
@@ -39,7 +37,7 @@ void main() {
   This line is number 24
   The time now is 13:07
   This package is prep
-  The package version is 0.1.2
+  The package version is 0.1.2+1
   Let's print the USERNAME environment variable: guest
 
  */

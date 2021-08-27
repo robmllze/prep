@@ -22,8 +22,11 @@
 - Added the "into" and "os" expressions
 - Improved README.md
 
+0.1.2+1
+- Fixed misleading sentence in README.md
+
 ## TODO
 
 - Improve parsing speed
-- Add more expressions
+- Experiment with more expressions
 - Build a CLI application so that prep can be used with other languages
