@@ -22,9 +22,9 @@ void main() {
   print("This line is number " + "<#l=22>".prepValue);
   print("The time now is " + "<#t=08:45>".prepValue);
   print("This package is " + "<#Package = prep>".prepValue);
-  print("The package version is " + "<#Version = 0.2.2>".prepValue);
+  print("The package version is " + "<#Version = 0.2.3>".prepValue);
   print("Let's print the USERNAME environment variable: " +
-      "<#ENV USERNAME = r0bm0>".prepValue);
+      "<#ENV USERNAME = guest>".prepValue);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -37,7 +37,7 @@ void main() {
   This line is number 24
   The time now is 13:07
   This package is prep
-  The package version is 0.2.2
+  The package version is 0.2.3
   Let's print the USERNAME environment variable: guest
 
  */

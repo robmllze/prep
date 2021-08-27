@@ -60,7 +60,7 @@ void main() {
   // Package as per pubspec.yaml.
   print("This package is " + "<#Package = prep>".value);
   // Version as per pubspec.yaml.
-  print("The package version is " + "<#Version = 0.2.2>".value);
+  print("The package version is " + "<#Version = 0.2.3>".value);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = guest>".value);;
 }
@@ -74,7 +74,7 @@ This line is number 13
 And this line is number 15
 The time now is 23:15
 This package is prep
-The package version is 0.2.2
+The package version is 0.2.3
 Let's print the USERNAME environment variable: guest
 ```
 
@@ -135,7 +135,7 @@ Replace: `<##ENV PATH>` or `<##ENV COMPUTERNAME>` or `<#ENV USERNAME>` etc.
 ## Installing
 ```yaml
 dev_dependencies:
-  prep: ^0.2.2 # https://pub.dev/packages/prep
+  prep: ^0.2.3 # https://pub.dev/packages/prep
 ```
 
 ## Configuring

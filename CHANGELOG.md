@@ -37,6 +37,9 @@
 - Updated CLI to 0.1.1
 - Updated readme
 
+0.2.3
+- Applied Dart formatting
+
 ## TODO
 
 - Improve parsing speed

@@ -31,12 +31,12 @@ String $(final String expression) {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension PrepKeyValue on String {
-  /// Deprecated. Use [prepKey] instead.
-  @deprecated
+  /// Extracts the key from a prep expression.
+  /// Prefer using [prepKey].
   String get key => $(this);
 
-  /// Deprecated. Use [prepValue] instead.
-  @deprecated
+  /// Extracts the value from a prep expression.
+  /// Prefer using [prepValue].
   String get value => $$(this);
 
   /// Extracts the key from a prep expression.
