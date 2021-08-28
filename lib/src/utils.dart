@@ -18,13 +18,11 @@ import 'package:prep/src/parser.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// Extracts the value from a prep expression.
-String $$(final String expression) {
+String _prepValue(final String expression) {
   return PrepParser.instance.$extract(expression)?.value.toString() ?? "";
 }
 
-/// Extracts the key from a prep expression.
-String $(final String expression) {
+String _prepKey(final String expression) {
   return PrepParser.instance.$extract(expression)?.key.toString() ?? "";
 }
 
@@ -38,8 +36,8 @@ extension PrepKeyValue on String {
   String get value => this.prepValue;
 
   /// Extracts the key from a prep expression.
-  String get prepKey => $(this);
+  String get prepKey => _prepKey(this);
 
   /// Extracts the value from a prep expression.
-  String get prepValue => $$(this);
+  String get prepValue => _prepValue(this);
 }

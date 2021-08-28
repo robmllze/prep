@@ -43,7 +43,11 @@
 0.3.0
 - Added PrepLog - a class for handling logs
 
+0.3.1
+- Fixed dartdoc error
+
 ## TODO
 
 - Improve parsing speed
+- Improve CLI
 - Experiment with more expressions
