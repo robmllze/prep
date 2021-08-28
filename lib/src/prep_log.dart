@@ -20,7 +20,15 @@ typedef OutputFn = Function(String);
 
 /// Use PrepLog to log the status of your application and help with debugging.
 class PrepLog {
-  PrepLog._(); // Only allow static access.
+  //
+  //
+  //
+
+  final String _file;
+
+  /// The parameter must be in the form "<#f=>" or "<#f=XXX>" where XXX is the
+  /// current file name.
+  const PrepLog.file(this._file);
 
   static int _entryCount = 0;
 
@@ -77,40 +85,35 @@ class PrepLog {
   //
 
   /// Logs a new entry.
-  static String _log({
+  String _log({
     required final String prefix,
     required final String message,
-    required final String l,
-    required final String f,
+    required final String line,
     required final OutputFn? output,
   }) {
-    final _file = f.prepValue;
-    final _line = int.tryParse(l.prepValue);
+    final _line = int.tryParse(line.prepValue) ?? "";
     final _time = _elapsed();
     final _timeFormatted = _time != -1 ? " ⏳ ${_time}s" : "";
     final _entry = '[${_entryCount++}] '
-        '$prefix In FILE $_file and LINE ${_line ?? ""}$_timeFormatted\n'
-        '"$message"';
+        '$prefix In FILE ${this._file.prepValue} and LINE $_line'
+        '$_timeFormatted\n"$message"';
     (output ?? _output).call(_entry);
     return _entry;
   }
 
   /// Logs an alert 🟡
   ///
-  /// `l` line number as a prep String.
-  /// `f` file name as a prep String.
-  static void alert(
-    final dynamic message, {
-    required final String l,
-    required final String f,
+  /// `line` line number as a prep String.
+  void alert(
+    final dynamic message,
+    final String line, {
     final OutputFn? output,
   }) {
     final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🟡",
       message: _messageAsString,
-      l: l,
-      f: f,
+      line: line,
       output: output,
     );
     allEntries.add(_entry);
@@ -119,20 +122,17 @@ class PrepLog {
 
   /// Logs an error 🔴
   ///
-  /// `l` line number as a prep String.
-  /// `f` file name as a prep String.
-  static void error(
-    final dynamic message, {
-    required final String l,
-    required final String f,
+  /// `line` line number as a prep String.
+  void error(
+    final dynamic message,
+    final String line, {
     final OutputFn? output,
   }) {
     final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🔴",
       message: _messageAsString,
-      l: l,
-      f: f,
+      line: line,
       output: output,
     );
     allEntries.add(_entry);
@@ -141,20 +141,17 @@ class PrepLog {
 
   /// Logs an info ⚪
   ///
-  /// `l` line number as a prep String.
-  /// `f` file name as a prep String.
-  static void info(
-    final dynamic message, {
-    required final String l,
-    required final String f,
+  /// `line` line number as a prep String.
+  void info(
+    final dynamic message,
+    final String line, {
     final OutputFn? output,
   }) {
     final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "⚪",
       message: _messageAsString,
-      l: l,
-      f: f,
+      line: line,
       output: output,
     );
     allEntries.add(_entry);
@@ -163,20 +160,17 @@ class PrepLog {
 
   /// Logs a note 🟢
   ///
-  /// `l` line number as a prep String.
-  /// `f` file name as a prep String.
-  static void note(
-    final dynamic message, {
-    required final String l,
-    required final String f,
+  /// `line` line number as a prep String.
+  void note(
+    final dynamic message,
+    final String line, {
     final OutputFn? output,
   }) {
     final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🟢",
       message: _messageAsString,
-      l: l,
-      f: f,
+      line: line,
       output: output,
     );
     allEntries.add(_entry);
@@ -185,20 +179,17 @@ class PrepLog {
 
   /// Logs a warning 🟠
   ///
-  /// `l` line number as a prep String.
-  /// `f` file name as a prep String.
-  static void warnings(
-    final dynamic message, {
-    required final String l,
-    required final String f,
+  /// `line` line number as a prep String.
+  void warning(
+    final dynamic message,
+    final String line, {
     final OutputFn? output,
   }) {
     final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🟠",
       message: _messageAsString,
-      l: l,
-      f: f,
+      line: line,
       output: output,
     );
     allEntries.add(_entry);

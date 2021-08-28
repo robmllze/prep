@@ -21,6 +21,8 @@ The CLI works well with any Dart project **including Flutter web projects**.
 
 import 'package:prep/prep.dart';
 
+const _LOG = PrepLog.file("<#f=>");
+
 void main() {
   // Process source files as per prep.yaml.
   prep();
@@ -38,10 +40,9 @@ void main() {
       "<#ENV USERNAME=>".prepValue);
   if (int.tryParse("42") == 42) {
     // PrepLog is a great tool for debugging!
-    PrepLog.note(
+    _LOG.note(
       "The answer to life, the Universe and everything is...42!",
-      l: "<#l=>",
-      f: "<#f=>",
+      "<#l=>",
     );
   }
 }
@@ -56,27 +57,28 @@ void main() {
 
 import 'package:prep/prep.dart';
 
+const _LOG = PrepLog.file("<#f=prep_example.dart>");
+
 void main() {
   // Process source files as per prep.yaml.
   prep();
   print("Follow me on Instagram " + "<#Instagram = @robmllze>".prepValue);
   print("This file is " + "<#f=prep_example.dart>".prepValue);
-  print("This line is number " + "<#l=13>".prepValue);
+  print("This line is number " + "<#l=15>".prepValue);
   // Use double ## to completely replace.
-  print("And this line is number " + "15");
+  print("And this line is number " + "17");
   print("The time now is " + "<#t=23:15>".prepValue);
   // Package as per pubspec.yaml.
   print("This package is " + "<#Package = prep>".prepValue);
   // Version as per pubspec.yaml.
-  print("The package version is " + "<#Version = 0.3.1>".prepValue);
+  print("The package version is " + "<#Version = 0.3.2>".prepValue);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = guest>".prepValue);
   if (int.tryParse("42") == 42) {
     // PrepLog is a great tool for debugging!
-    PrepLog.note(
+    _LOG.note(
       "The answer to life, the Universe and everything is...42!",
-      l: "<#l=27>",
-      f: "<#f=prep_example.dart>",
+      "<#l=29>",
     );
   }
 }
@@ -90,7 +92,7 @@ This line is number 13
 And this line is number 15
 The time now is 23:15
 This package is prep
-The package version is 0.3.1
+The package version is 0.3.2
 Let's print the USERNAME environment variable: guest
 [0] 🟢 In FILE prep_example.dart and LINE 27 ⏳ 0.003s
 "The answer to life, the Universe and everything is...42!"
@@ -153,7 +155,7 @@ Replace: `<##ENV PATH>` or `<##ENV COMPUTERNAME>` or `<#ENV USERNAME>` etc.
 ## Installing
 ```yaml
 dev_dependencies:
-  prep: ^0.3.1 # https://pub.dev/packages/prep
+  prep: ^0.3.2 # https://pub.dev/packages/prep
 ```
 
 ## Configuring

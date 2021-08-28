@@ -46,6 +46,11 @@
 0.3.1
 - Fixed dartdoc error
 
+0.3.2
+- Fixed typo in PrepLog
+- Added PrepLog.file constructor
+- Rebuilt CLI
+
 ## TODO
 
 - Improve parsing speed
