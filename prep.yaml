@@ -4,7 +4,7 @@
 # Feel free to DM me about bugs or questions.
 
 # Files in this directory and all its subdirectories will be parsable.
-path: "."
+path: "./example"
 
 # If you need to tweak the syntax, do it here.
 # Note: This is experimental!

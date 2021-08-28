@@ -40,6 +40,9 @@
 0.2.3
 - Applied Dart formatting
 
+0.3.0
+- Added PrepLog - a class for handling logs
+
 ## TODO
 
 - Improve parsing speed

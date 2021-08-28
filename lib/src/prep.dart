@@ -13,6 +13,7 @@
 library prep;
 
 import 'dart:io' show File, FileSystemException;
+import 'package:prep/prep.dart';
 import 'package:yaml/yaml.dart';
 import 'prep_example.yaml.dart';
 import 'files_and_folders.dart';
@@ -33,6 +34,8 @@ import 'parser.dart';
 /// The example file prep_example.yaml will be generated in the project
 /// directory if `prepYaml` doesn't exist.
 ///
+/// Note: Calls PrepLog.start().
+///
 /// Completes with `true` if there were no errors.
 Future<bool> prep({
   final String? path,
@@ -44,6 +47,7 @@ Future<bool> prep({
   final String pubspecYaml = "pubspec.yaml",
   final bool generateExample = true,
 }) {
+  PrepLog.start();
   return Future<bool>(() async {
     try {
       // Generate prep_example.yaml if necessary.

@@ -12,4 +12,5 @@
 
 library prep;
 
-export 'src/utils.dart' show PrepKeyValue;
+export 'src/utils.dart';
+export 'src/prep_log.dart';

@@ -32,12 +32,10 @@ String $(final String expression) {
 
 extension PrepKeyValue on String {
   /// Extracts the key from a prep expression.
-  /// Prefer using [prepKey].
-  String get key => $(this);
+  String get key => this.prepKey;
 
   /// Extracts the value from a prep expression.
-  /// Prefer using [prepValue].
-  String get value => $$(this);
+  String get value => this.prepValue;
 
   /// Extracts the key from a prep expression.
   String get prepKey => $(this);

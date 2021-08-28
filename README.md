@@ -1,10 +1,10 @@
 # Welcome to prep
 
-Inspired by the C preprocessor, this package helps you manage your project with unique source code expressions.
+Inspired by the C preprocessor, this package helps you manage your project with unique source code expressions. It also comes with the PrepLog class that's an ideal tool for logging and debugging.
 
 This package includes a compilable CLI application that can be used to prep source files of any programming language. See source code on GitHub: https://github.com/robmllze/prep.
 
-The CLI works well with any Dart project including Flutter web projects.
+The CLI works well with any Dart project **including Flutter web projects**.
 
 ## Example
 
@@ -24,18 +24,26 @@ import 'package:prep/prep.dart';
 void main() {
   // Process source files as per prep.yaml.
   prep();
-  print("Follow me on Instagram " + "<#Instagram=>".value);
-  print("This file is " + "<#f=>".value);
-  print("This line is number " + "<#l=>".value);
+  print("Follow me on Instagram " + "<#Instagram=>".prepValue);
+  print("This file is " + "<#f=>".prepValue);
+  print("This line is number " + "<#l=>".prepValue);
   // Use double ## to completely replace.
   print("And this line is number " + "<##l>");
-  print("The time now is " + "<#t>".value);
+  print("The time now is " + "<#t>".prepValue);
   // Package as per pubspec.yaml.
-  print("This package is " + "<#Package>".value);
+  print("This package is " + "<#Package>".prepValue);
   // Version as per pubspec.yaml.
-  print("The package version is " + "<#Version>".value);
+  print("The package version is " + "<#Version>".prepValue);
   print("Let's print the USERNAME environment variable: " +
-      "<#ENV USERNAME=>".value);
+      "<#ENV USERNAME=>".prepValue);
+  if (int.tryParse("42") == 42) {
+    // PrepLog is a great tool for debugging!
+    PrepLog.note(
+      "The answer to life, the Universe and everything is...42!",
+      l: "<#l=>",
+      f: "<#f=>",
+    );
+  }
 }
 ```
 
@@ -51,18 +59,26 @@ import 'package:prep/prep.dart';
 void main() {
   // Process source files as per prep.yaml.
   prep();
-  print("Follow me on Instagram " + "<#Instagram = @robmllze>".value);
-  print("This file is " + "<#f=prep_example.dart>".value);
-  print("This line is number " + "<#l=13>".value);
+  print("Follow me on Instagram " + "<#Instagram = @robmllze>".prepValue);
+  print("This file is " + "<#f=prep_example.dart>".prepValue);
+  print("This line is number " + "<#l=13>".prepValue);
   // Use double ## to completely replace.
   print("And this line is number " + "15");
-  print("The time now is " + "<#t=23:15>".value);
+  print("The time now is " + "<#t=23:15>".prepValue);
   // Package as per pubspec.yaml.
-  print("This package is " + "<#Package = prep>".value);
+  print("This package is " + "<#Package = prep>".prepValue);
   // Version as per pubspec.yaml.
-  print("The package version is " + "<#Version = 0.2.3>".value);
+  print("The package version is " + "<#Version = 0.3.0>".prepValue);
   print("Let's print the USERNAME environment variable: " +
-      "<#ENV USERNAME = guest>".value);;
+      "<#ENV USERNAME = guest>".prepValue);
+  if (int.tryParse("42") == 42) {
+    // PrepLog is a great tool for debugging!
+    PrepLog.note(
+      "The answer to life, the Universe and everything is...42!",
+      l: "<#l=27>",
+      f: "<#f=prep_example.dart>",
+    );
+  }
 }
 ```
 
@@ -74,8 +90,10 @@ This line is number 13
 And this line is number 15
 The time now is 23:15
 This package is prep
-The package version is 0.2.3
+The package version is 0.3.0
 Let's print the USERNAME environment variable: guest
+[0] 🟢 In FILE prep_example.dart and LINE 27 ⏳ 0.003s
+"The answer to life, the Universe and everything is...42!"
 ```
 
 ## Expressions
@@ -135,7 +153,7 @@ Replace: `<##ENV PATH>` or `<##ENV COMPUTERNAME>` or `<#ENV USERNAME>` etc.
 ## Installing
 ```yaml
 dev_dependencies:
-  prep: ^0.2.3 # https://pub.dev/packages/prep
+  prep: ^0.3.0 # https://pub.dev/packages/prep
 ```
 
 ## Configuring
