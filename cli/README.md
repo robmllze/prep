@@ -31,7 +31,7 @@ flutter run -d web-server --web-port 8080
     dart run bin/cli.dart --new prep.yaml
     ./bin/windows/prep.exe
 
-### CLI Options
+### Options
 
 ```text
 help            Take a guess!
@@ -41,5 +41,39 @@ new             Generates the new config file prep.yaml
 --path PATH     Prep from PATH instead of current path
 --skip          Skip prepping
 ```
+
+## VS Code Tip
+
+After adding the CLI to your PATH environment variable, add the following to `tasks.json` in your project's `.vscode` folder:
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        // Preps files in your project's lib folder as per prep.yaml.
+        {
+            "label": "📘 Prep",
+            "type": "shell",
+            "command": "prep prep.yaml --path ./lib",
+        },
+        // If you're working with Flutter.
+        {
+            "label": "⚡ Prep & Serve",
+            "type": "shell",
+            "command": "prep prep.yaml --path ./lib;flutter run -d web-server --web-port 8080",
+        },
+         // If you're developing web applications (with Flutter for example).
+        {
+            "label": "🌐 8080",
+            "type": "shell",
+            "command": "start http://localhost:8080",
+        }
+    ]
+}
+```
+
+Install the extension "Task Runner" by forbeslindesay. This will allow you to run the commands in `tasks.json` with a simple click. You can click on the tasks defined above under in the Explorer tab under TASK RUNNER:
+
+<img src="https://robmllze.github.io/prep/cli/readme_assets/task_runner.png" style="max-height: 400px; max-width: 400px; object-fit: contain" />
 
 
