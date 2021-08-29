@@ -74,6 +74,6 @@ After adding the CLI to your PATH environment variable, add the following to `ta
 
 Install the extension "Task Runner" by forbeslindesay. This will allow you to run the commands in `tasks.json` with a simple click. You can click on the tasks defined above under in the Explorer tab under TASK RUNNER:
 
-<img src="https://robmllze.github.io/prep/cli/readme_assets/task_runner.png" style="max-height: 400px; max-width: 400px; object-fit: contain" />
+<img src="https://robmllze.github.io/prep/cli/readme_assets/task_runner.png" style="max-height: 200px; max-width: 200px; object-fit: contain" />
 
 
