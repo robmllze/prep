@@ -24,7 +24,7 @@ void main() {
   print("This line is number " + "<#l=24>".prepValue);
   print("The time now is " + "<#t=11:30>".prepValue);
   print("This package is " + "<#Package = prep>".prepValue);
-  print("The package version is " + "<#Version = 0.3.2>".prepValue);
+  print("The package version is " + "<#Version = 0.3.3>".prepValue);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = r0bm0>".prepValue);
   if (int.tryParse("42") == 42) {
@@ -46,7 +46,7 @@ void main() {
   This line is number 24
   The time now is 11:30
   This package is prep
-  The package version is 0.3.2
+  The package version is 0.3.3
   Let's print the USERNAME environment variable: r0bm0
   [0] 🟢 In FILE prep_example.dart and LINE 34 ⏳ 0.003s
   "The answer to life, The Universe and everything is...42!"

@@ -51,6 +51,9 @@
 - Added PrepLog.file constructor
 - Rebuilt CLI
 
+0.3.3
+- Added ignoring feature for log entries
+
 ## TODO
 
 - Improve parsing speed
