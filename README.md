@@ -71,7 +71,7 @@ void main() {
   // Package as per pubspec.yaml.
   print("This package is " + "<#Package = prep>".prepValue);
   // Version as per pubspec.yaml.
-  print("The package version is " + "<#Version = 0.3.3>".prepValue);
+  print("The package version is " + "<#Version = 0.3.5>".prepValue);
   print("Let's print the USERNAME environment variable: " +
       "<#ENV USERNAME = guest>".prepValue);
   if (int.tryParse("42") == 42) {
@@ -92,7 +92,7 @@ This line is number 13
 And this line is number 15
 The time now is 23:15
 This package is prep
-The package version is 0.3.3
+The package version is 0.3.5
 Let's print the USERNAME environment variable: guest
 [0] 🟢 In FILE prep_example.dart and LINE 27 ⏳ 0.003s
 "The answer to life, the Universe and everything is...42!"
@@ -155,7 +155,7 @@ Replace: `<##ENV PATH>` or `<##ENV COMPUTERNAME>` or `<#ENV USERNAME>` etc.
 ## Installing
 ```yaml
 dev_dependencies:
-  prep: ^0.3.3 # https://pub.dev/packages/prep
+  prep: ^0.3.5 # https://pub.dev/packages/prep
 ```
 
 ## Configuring

@@ -74,8 +74,8 @@ Future<bool> prep({
       });
       final _prepDecoded =
           ((_prep.isNotEmpty ? loadYaml(_prep) : null) ?? {}) as Map;
-      final _prepSyntaxBeg = (_prepDecoded["syntax_beg"] ?? "`") as String;
-      final _prepSyntaxEnd = (_prepDecoded["syntax_end"] ?? "`") as String;
+      final _prepSyntaxBeg = (_prepDecoded["syntax_beg"] ?? "<") as String;
+      final _prepSyntaxEnd = (_prepDecoded["syntax_end"] ?? ">") as String;
       final _prepSyntaxSep = (_prepDecoded["syntax_sep"] ?? "=") as String;
       final _prepIncludeEnv = (_prepDecoded["include_env"]) as bool?;
       final _prepPath = (_prepDecoded["path"] ?? ".") as String;

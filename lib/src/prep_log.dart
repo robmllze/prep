@@ -32,29 +32,6 @@ class PrepLog {
 
   static int _entryCount = 0;
 
-  //
-  //
-  //
-
-  static final List<String> _ignore = [];
-
-  /// The next log entry with a key in `keys` gets ignored.
-  static void ignoreOnceByKey(final List<String> keys) {
-    _ignore.addAll(keys);
-  }
-
-  static bool _tryNotToIgnore(final String? key) {
-    if (key != null && _ignore.contains(key)) {
-      _ignore.remove(key);
-      return true;
-    }
-    return false;
-  }
-
-  //
-  //
-  //
-
   /// All log entries are added to this List.
   static final List<String> allEntries = [];
 
@@ -118,7 +95,7 @@ class PrepLog {
     final _time = _elapsed();
     final _timeFormatted = _time != -1 ? " ⏳ ${_time}s" : "";
     final _entry = '[${_entryCount++}] '
-        '$prefix In FILE ${this._file.prepValue} and LINE $_line:'
+        '$prefix In FILE ${this._file.prepValue} and LINE $_line'
         '$_timeFormatted\n"$message"';
     (output ?? _output).call(_entry);
     return _entry;
@@ -130,13 +107,12 @@ class PrepLog {
   void alert(
     final dynamic message,
     final String line, {
-    final String? key,
     final OutputFn? output,
   }) {
-    if (!_tryNotToIgnore(key)) return;
+    final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🟡",
-      message: message.toString(),
+      message: _messageAsString,
       line: line,
       output: output,
     );
@@ -150,13 +126,12 @@ class PrepLog {
   void error(
     final dynamic message,
     final String line, {
-    final String? key,
     final OutputFn? output,
   }) {
-    if (!_tryNotToIgnore(key)) return;
+    final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🔴",
-      message: message.toString(),
+      message: _messageAsString,
       line: line,
       output: output,
     );
@@ -170,13 +145,12 @@ class PrepLog {
   void info(
     final dynamic message,
     final String line, {
-    final String? key,
     final OutputFn? output,
   }) {
-    if (!_tryNotToIgnore(key)) return;
+    final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "⚪",
-      message: message.toString(),
+      message: _messageAsString,
       line: line,
       output: output,
     );
@@ -190,13 +164,12 @@ class PrepLog {
   void note(
     final dynamic message,
     final String line, {
-    final String? key,
     final OutputFn? output,
   }) {
-    if (!_tryNotToIgnore(key)) return;
+    final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🟢",
-      message: message.toString(),
+      message: _messageAsString,
       line: line,
       output: output,
     );
@@ -210,13 +183,12 @@ class PrepLog {
   void warning(
     final dynamic message,
     final String line, {
-    final String? key,
     final OutputFn? output,
   }) {
-    if (!_tryNotToIgnore(key)) return;
+    final _messageAsString = message.toString();
     final _entry = _log(
       prefix: "🟠",
-      message: message.toString(),
+      message: _messageAsString,
       line: line,
       output: output,
     );

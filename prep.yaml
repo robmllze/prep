@@ -6,7 +6,7 @@
 # Files in this directory and all its subdirectories will be parsable.
 path: "./example"
 
-# If you need to tweak the syntax, do it here.
+#If you need to tweak the syntax, do it here.
 # Note: This is experimental!
 syntax_beg: "<" # This also works well: "`"
 syntax_end: ">" # This also works well: "`"
